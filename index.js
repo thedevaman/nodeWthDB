@@ -9,6 +9,7 @@ const client = new MongoClient(url)
 
 const app = express()
 app.use(express.urlencoded({extended:true}))
+app.use(express.json())
 
 app.set("view engine",'ejs')
 
@@ -42,7 +43,22 @@ client.connect().then((connection)=>{
         //   const students = await collection.find().toArray();
           res.send("data Saved")
     })
+    
 
+    app.post('/add-student-api',async(req,res)=>{
+
+      const {name,email,age}=req.body
+
+      if(!name || !email || !age){
+       res.send({message:"failed",success:"false"});
+       return false     
+      }
+
+      const collection = db.collection("students")
+      const result = await collection.insertOne(req.body)
+      console.log(req.body)
+      res.send({"message":"success",success:"true",result:result});
+    })
 
 })
 
