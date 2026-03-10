@@ -95,6 +95,31 @@ client.connect().then((connection)=>{
     })
 
 
+    app.post("/ui/update/:id",(req,resp)=>{
+     
+      const id = req.params.id;
+      const collection = db.collection("students")
+      const filter = {_id : new ObjectId(id)}
+      const update = {$set:req.body}
+      const result = collection.updateOne(filter,update)
+      resp.send("data updated")
+    })
+
+      app.put("/update/:id",(req,resp)=>{
+      // console.log(req.body);
+      const id = req.params.id;
+      const collection = db.collection("students")
+      const filter = {_id : new ObjectId(id)}
+      const update = {$set:req.body}
+      const result = collection.updateOne(filter,update)
+      if(result)
+      {
+       resp.send({message:"Student Data updated",success:true,result:req.body})
+      }else{
+         resp.send({message:"Something Went Wrong",success:false,result:null})    
+      }
+    })
+
 })
 
 

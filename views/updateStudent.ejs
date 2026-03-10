@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Students Update Form</h1>
-    <form method="post" action="">
+    <form method="post" action="/ui/update/<%= result._id %>">
             <input type="text" placeholder="Enter Students Name" name="name" value="<%= result.name  %>" /><br><br>
             <input type="number" placeholder="Enter Students age" name="age" value="<%= result.age  %>" /><br><br>
             <input type="email" placeholder="Enter Students Email" name="email" value="<%= result.email  %>"/><br><br>
