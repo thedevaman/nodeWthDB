@@ -73,17 +73,25 @@ client.connect().then((connection)=>{
       
     })
 
-     app.get("/delete/:id",async(req,res)=>{
 
-      const collection = db.collection("students")
-      const result = await collection.deleteOne({_id: new ObjectId(req.params.id)})
-      if(result)
-      {
-       res.send("<h1>Student data deleted</h1>")
-      }else{
-         res.send("<h1>Something went wrong</h1>")    
-      }
-      
+
+
+    app.get("/ui/student/:id",async(req,resp)=>{
+      const id = req.params.id;
+       const collection = db.collection("students")
+      const result = await collection.findOne({_id: new ObjectId(req.params.id)})
+      resp.render('updateStudent',{result})
+    })
+
+       app.get("/student/:id",async(req,resp)=>{
+      const id = req.params.id;
+       const collection = db.collection("students")
+      const result = await collection.findOne({_id: new ObjectId(req.params.id)})
+      resp.send({
+        message:"data fetched",
+        success : true,
+        result : result
+      })
     })
 
 

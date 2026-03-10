@@ -19,7 +19,9 @@
             <td><%= student.name %></td>
             <td><%= student.age %></td>
             <td><%= student.email %></td>
-            <td><a href="delete/<%= student._id %>">Delete</a></td>
+            <td><a href="delete/<%= student._id %>">Delete</a>
+            <br>    
+            <a href="ui/student/<%= student._id %>">update</a></td>
         </tr>
     <% }) %>
     </table>
